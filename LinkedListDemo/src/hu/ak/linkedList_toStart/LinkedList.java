@@ -12,7 +12,7 @@ public class LinkedList {
 			Link newLink = new Link(number);
 			Link second = first;
 			first = newLink;
-			fisrt.setNext(second);
+			first.setNext(second);
 			
 		}
 	}
