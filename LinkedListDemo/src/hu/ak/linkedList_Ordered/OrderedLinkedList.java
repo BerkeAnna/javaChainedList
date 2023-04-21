@@ -1,8 +1,8 @@
-package hu.ak.linkedList_remove;
+package hu.ak.linkedList_Ordered;
 
-import hu.ak.linkedList_remove.LinkedList;
+import hu.ak.linkedList_Ordered.OrderedLinkedList;
 
-public class LinkedList {
+public class OrderedLinkedList {
 	
 	public Link first;
 	
@@ -17,20 +17,26 @@ public class LinkedList {
 		return false;
 	}
 	
-	public boolean simpleAddBackwards(int number)
+	public boolean add(int number)
 	{
 		boolean alreadyExists = contains(number);
-		if(first == null) {
-			first = new Link(number);
-		}else {
+		Link insertionPoint = first;
+		Link previous = first;
 		
-				Link newLink = new Link(number);
-				Link second = first;
-				first = newLink;
-				first.setNext(second);
-			
+		while(insertionPoint != null && insertionPoint.getNumber() < number) {
+			previous = insertionPoint;
+			insertionPoint = insertionPoint.getNext();
 		}
-		return alreadyExists;
+		Link newLink = new Link(number);
+		if(insertionPoint == first) {
+			newLink.setNext(first);
+			first = newLink;
+		} else {
+			previous.setNext(newLink);
+			newLink.setNext(insertionPoint);
+		}
+		
+		return !alreadyExists;
 	}
 	
 	public void deleteFirst(int number) {
@@ -61,11 +67,12 @@ public class LinkedList {
 					first = current.getNext();
 				}else {
 					previous.setNext(current.getNext());
+					current = current.getNext();
 				}
+			}else {
+				previous = current;
+				current = current.getNext();
 			}
-			previous = current;
-			current = current.getNext();
-			
 		}
 			
 	}
