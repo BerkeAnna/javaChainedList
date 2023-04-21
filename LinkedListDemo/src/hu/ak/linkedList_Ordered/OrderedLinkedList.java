@@ -67,12 +67,11 @@ public class OrderedLinkedList {
 					first = current.getNext();
 				}else {
 					previous.setNext(current.getNext());
-					current = current.getNext();
 				}
 			}else {
 				previous = current;
-				current = current.getNext();
 			}
+			current = current.getNext();
 		}
 			
 	}
